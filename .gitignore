@@ -1,0 +1,22 @@
+# ignore directories
+.ipynb_checkpoints/
+__pycache__/
+backbone/models/
+core/results/
+core/data/
+
+
+# OS generated files
+.DS_Store
+
+
+# file type
+*.txt
+*.pth
+*.pdf
+*.ipynb
+
+
+# IntelliJ IDEA
+.idea/
+*.iml
