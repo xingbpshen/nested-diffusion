@@ -1,4 +1,4 @@
-# Medical Image Classification with Latent-Guided Diffusion and Nested-Ensembles
+# Improving Robustness and Reliability in Medical Image Classification with Latent-Guided Diffusion and Nested-Ensembles
 
 This repository contains the official implementation of the paper:
 
