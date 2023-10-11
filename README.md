@@ -14,4 +14,4 @@ This repository contains the official implementation of the paper:
 ## Evaluation
 
 ## Acknowledgements
-This work is founded by the Natural Sciences and Engineering Research Council (NSERC) of Canada, the Canadian Institute for Advanced Research (CIFAR) Artificial Intelligence Chairs program, the Mila - Quebec AI Institute technology transfer program, Calcul Quebec, and the Digital Research Alliance of Canada. This repository contains code adapted from repositories [CARD](https://github.com/XzwHan/CARD) and [SEViT](https://github.com/faresmalik/SEViT). We thank to the authors for their great work.
+This work is founded by the Natural Sciences and Engineering Research Council (NSERC) of Canada, the Canadian Institute for Advanced Research (CIFAR) Artificial Intelligence Chairs program, the Mila - Quebec AI Institute technology transfer program, Calcul Quebec, and the Digital Research Alliance of Canada. This repository contains code adapted from repositories [CARD](https://github.com/XzwHan/CARD) and [SEViT](https://github.com/faresmalik/SEViT). We thank to the above repositories' authors for their great work.
