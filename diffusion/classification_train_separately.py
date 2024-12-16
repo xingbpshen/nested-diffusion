@@ -251,11 +251,11 @@ class Diffusion(object):
                                        'ChestXRayAtkAUTOPGD', 'ChestXRayAtkCW', 'ChestXRayValidate']:
                 if config.diffusion.aux_cls.arch == "sevit":
                     # pwd should be in project_root/classification dir
-                    trained_path = config.diffusion.trained_aux_cls_ckpt_path + "_seed{}/".format(self.seed)
+                    trained_path = config.diffusion.trained_aux_cls_ckpt_path
                     sys.path.append(trained_path)
                     self.cond_pred_model = {}
                     self.cond_pred_model['vit'] = torch.load(
-                        os.path.join(trained_path, 'vit_base_patch16_224_in21k_ChestXRay.pth')).to(self.device)
+                        os.path.join(trained_path, 'vit_base_patch16_224_ChestXRay.pth')).to(self.device)
                     self.cond_pred_model['vit'].eval()
                     self.cond_pred_model['mlps'] = []
                     mlps_root_dir = os.path.join(trained_path, 'MLPs')
@@ -281,11 +281,11 @@ class Diffusion(object):
                                          'ISICSkinCancerValidate']:
                 if config.diffusion.aux_cls.arch == "sevit":
                     # pwd should be in project_root/classification dir
-                    trained_path = config.diffusion.trained_aux_cls_ckpt_path + "_seed{}/".format(self.seed)
+                    trained_path = config.diffusion.trained_aux_cls_ckpt_path
                     sys.path.append(trained_path)
                     self.cond_pred_model = {}
                     self.cond_pred_model['vit'] = torch.load(
-                        os.path.join(trained_path, 'vit_base_patch16_224_in21k_ISICSkinCancer.pth')).to(self.device)
+                        os.path.join(trained_path, 'vit_base_patch16_224_ISICSkinCancer.pth')).to(self.device)
                     self.cond_pred_model['vit'].eval()
                     self.cond_pred_model['mlps'] = []
                     mlps_root_dir = os.path.join(trained_path, 'MLPs')
@@ -507,14 +507,7 @@ class Diffusion(object):
             # load diffusion models to CPU to save GPU memory
             noise_estimators.append(
                 ConditionalModel(config, guidance=config.diffusion.include_guidance).to(torch.device('cpu')))
-            if self.seed == 0 or self.seed == 7:
-                state = torch.load(config.diffusion.trained_diffusion_ckpt_path[0][i])
-            elif self.seed == 9 or self.seed == 75:
-                state = torch.load(config.diffusion.trained_diffusion_ckpt_path[1][i])
-            elif self.seed == 10 or self.seed == 1000:
-                state = torch.load(config.diffusion.trained_diffusion_ckpt_path[2][i])
-            else:
-                raise NotImplementedError
+            state = torch.load(config.diffusion.trained_diffusion_ckpt_path[0][i])
             noise_estimators[i].load_state_dict(state['noise_estimator'])
             print('Diffusion model {} loaded'.format(i))
         if self.config.diffusion.aux_cls.arch == 'sevit':
@@ -678,7 +671,7 @@ class Diffusion(object):
         args = self.args
         config = self.config
         tb_logger = self.config.tb_logger
-        _, _, test_dataset = get_dataset(args, config)
+        _, _, _, test_dataset = get_dataset(args, config)
         test_loader = data.DataLoader(
             test_dataset,
             batch_size=config.testing.batch_size,
@@ -693,14 +686,7 @@ class Diffusion(object):
             # load diffusion models to CPU to save GPU memory
             noise_estimators.append(
                 ConditionalModel(config, guidance=config.diffusion.include_guidance).to(torch.device('cpu')))
-            if self.seed == 0 or self.seed == 7:
-                state = torch.load(config.diffusion.trained_diffusion_ckpt_path[0][i])
-            elif self.seed == 9 or self.seed == 75:
-                state = torch.load(config.diffusion.trained_diffusion_ckpt_path[1][i])
-            elif self.seed == 10 or self.seed == 1000:
-                state = torch.load(config.diffusion.trained_diffusion_ckpt_path[2][i])
-            else:
-                raise NotImplementedError
+            state = torch.load(config.diffusion.trained_diffusion_ckpt_path[0][i])
             noise_estimators[i].load_state_dict(state['noise_estimator'])
             print('Diffusion model {} loaded'.format(i))
         if self.config.diffusion.aux_cls.arch == 'sevit':
@@ -865,15 +851,15 @@ class Diffusion(object):
         args = self.args
         config = self.config
         tb_logger = self.config.tb_logger
-        data_object, train_dataset, test_dataset = get_dataset(args, config)
+        data_object, train_dataset, valid_dataset, _ = get_dataset(args, config)
         train_loader = data.DataLoader(
             train_dataset,
             batch_size=config.training.batch_size,
             shuffle=True,
             num_workers=config.data.num_workers,
         )
-        test_loader = data.DataLoader(
-            test_dataset,
+        valid_loader = data.DataLoader(
+            valid_dataset,
             batch_size=config.testing.batch_size,
             shuffle=False,
             num_workers=config.data.num_workers,
@@ -1082,7 +1068,7 @@ class Diffusion(object):
                         else:
                             raise NotImplementedError
 
-                        for test_batch_idx, (images_raw, target) in enumerate(test_loader):
+                        for test_batch_idx, (images_raw, target) in enumerate(valid_loader):
                             if self.config.diffusion.aux_cls.arch == "sevit" and self.config.data.dataset in [
                                 'ChestXRay', 'ISICSkinCancer']:
                                 images_224 = images_raw.clone().to(self.device)

@@ -147,7 +147,10 @@ def get_dataset(args, config):
         _, _dataset = data_loader(root_dir=config.data.dataroot, dataset_name=config.data.dataset,
                                   preprocess=args.preprocess, use_precal_mean_std=True)
         train_dataset = _dataset['train']
+        valid_dataset = _dataset['valid']
         test_dataset = _dataset['test']
+
+        return data_object, train_dataset, valid_dataset, test_dataset
 
     elif config.data.dataset in ['ChestXRayValidate', 'ISICSkinCancerValidate']:
         if config.data.dataset == 'ChestXRayValidate':

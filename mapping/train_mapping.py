@@ -20,26 +20,28 @@ def set_seed(seed):
     torch.backends.cudnn.benchmark = False
 
 
-parser = argparse.ArgumentParser(description='Train MLPs for ViT blocks outputs')
-parser.add_argument('--seed', type=int, help='Seed value, 0, 1000, 4000', required=True)
+parser = argparse.ArgumentParser(description='Train Mapping Networks for encoder blocks outputs')
+parser.add_argument('--seed', type=int, help='Seed value', required=False)
 parser.add_argument('--dataset', type=str, help='The dataset name', choices=['ChestXRay', 'ISICSkinCancer', 'PathMNIST',
                                                                              'RotatedMNIST'], required=True)
 parser.add_argument('--root_dir', type=str, help='The directory to the data images', required=True)
 parser.add_argument('--preprocess', type=str, help='The preprocess method', choices=['grayscaled', 'standardized'],
-                    required=True)
-parser.add_argument('--mlp_idx', type=int, help='The index of the output block', required=True)
+                    required=False, default='grayscaled')
+parser.add_argument('--mn_idx', type=int, help='The index of the Mapping Network', choices=[0, 1, 2, 3, 4], required=True)
 args = parser.parse_args()
 
 
-seed = args.seed
+if args.seed is None:
+    seed = random.randint(0, 10000)
+else:
+    seed = args.seed
 dataset_name = args.dataset
-mlp_idx = args.mlp_idx
+mn_idx = args.mn_idx
 root_dir = args.root_dir
 preprocess = args.preprocess
-vit = torch.load('models/{}_{}/seed{}/vit_base_patch16_224_in21k_{}.pth'.format(dataset_name, preprocess, seed,
-                                                                                dataset_name))
+vit = torch.load('models/{}/vit_base_patch16_224_{}.pth'.format(dataset_name, dataset_name))
 
-print('Training MLP {} with seed {} on {}'.format(mlp_idx, seed, root_dir))
+print('Training Mapping Network {} on {}'.format(mn_idx, root_dir))
 set_seed(seed)
 if dataset_name in ['ChestXRay', 'ISICSkinCancer']:
     num_classes = 2
@@ -56,9 +58,9 @@ model = model.cuda()
 vit = vit.cuda()
 loader_, dataset_ = data_loader(root_dir=root_dir, dataset_name=dataset_name, preprocess=preprocess, batch_size=batch_size)
 train_loader = loader_['train']
-test_loader = loader_['test']
+valid_loader = loader_['valid']
 train_dataset = dataset_['train']
-test_dataset = dataset_['test']
+valid_dataset = dataset_['valid']
 # Define loss function, optimizer, and learning rate scheduler
 criterion = nn.CrossEntropyLoss()
 if dataset_name == 'ChestXRay':
@@ -100,7 +102,7 @@ for epoch in range(epochs):
 
         x = vit.patch_embed(inputs)
         x_0 = vit.pos_drop(x)
-        for i in range(0, mlp_idx + 1):
+        for i in range(0, mn_idx + 1):
             x_0 = vit.blocks[i](x_0)
 
         optimizer.zero_grad()
@@ -129,14 +131,14 @@ for epoch in range(epochs):
     running_loss = 0.0
     running_corrects = 0
 
-    for inputs, labels in test_loader:
+    for inputs, labels in valid_loader:
         inputs = inputs.to(device)
         labels = labels.to(device)
 
         with torch.no_grad():
             x = vit.patch_embed(inputs)
             x_0 = vit.pos_drop(x)
-            for i in range(0, mlp_idx + 1):
+            for i in range(0, mn_idx + 1):
                 x_0 = vit.blocks[i](x_0)
             outputs = model(x_0, dataset=dataset_name)
             _, preds = torch.max(outputs, 1)
@@ -145,22 +147,19 @@ for epoch in range(epochs):
         running_loss += loss.item() * inputs.size(0)
         running_corrects += torch.sum(preds == labels.data)
 
-    epoch_loss = running_loss / len(test_dataset)
-    epoch_acc = running_corrects.double() / len(test_dataset)
+    epoch_loss = running_loss / len(valid_dataset)
+    epoch_acc = running_corrects.double() / len(valid_dataset)
 
     print(f'Epoch {epoch} Test Loss: {epoch_loss:.4f} Acc: {epoch_acc:.4f}')
 
     if epoch_acc > best_acc:
         best_train_acc = train_acc
         best_acc = epoch_acc
-        if not os.path.exists('./models/{}_{}/seed{}/MLPs/'.format(dataset_name, preprocess, seed)):
-            os.makedirs('./models/{}_{}/seed{}/MLPs/'.format(dataset_name, preprocess, seed))
-        torch.save(model, './models/{}_{}/seed{}/MLPs/block_{}.pth'.format(dataset_name, preprocess, seed, mlp_idx))
+        if not os.path.exists('./models/{}/MLPs/'.format(dataset_name)):
+            os.makedirs('./models/{}/MLPs/'.format(dataset_name))
+        torch.save(model, './models/{}/MLPs/block_{}.pth'.format(dataset_name, mn_idx))
 
     if scheduler is not None:
         scheduler.step()
 
-print('MLP {} seed {} on {} {} best train Acc: {:.4f} val Acc: {:.4f}'.format(mlp_idx, seed, preprocess, dataset_name,
-                                                                              best_train_acc, best_acc))
-
-
+print('MLP {} on {} best train Acc: {:.4f} val Acc: {:.4f}'.format(mn_idx, dataset_name, best_train_acc, best_acc))

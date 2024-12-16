@@ -1,9 +1,10 @@
 # ignore directories
 .ipynb_checkpoints/
 __pycache__/
-backbone/models/
-core/results/
-core/data/
+mapping/models/base/
+diffusion/results/
+diffusion/data/
+tmp/
 
 
 # OS generated files

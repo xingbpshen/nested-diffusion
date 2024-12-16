@@ -9,6 +9,7 @@ import time
 import torch
 import numpy as np
 from scipy.optimize import minimize
+import random
 
 torch.set_printoptions(sci_mode=False)
 
@@ -18,7 +19,7 @@ parser = argparse.ArgumentParser(description=globals()["__doc__"])
 parser.add_argument('--low_mem_mode', type=bool, help='Turing on low VRAM mode', required=False, default=False)
 parser.add_argument('--calib', action="store_true", help="Whether to test the calibration model")
 parser.add_argument('--mlp_idx', type=int, required=False, help='Train the diffusion model with mlp index')
-parser.add_argument('--seed', type=int, help='Seed value', required=True)
+parser.add_argument('--seed', type=int, help='Seed value', required=False)
 parser.add_argument('--preprocess', type=str, help='The preprocess method', choices=['grayscaled', 'standardized'],
                     required=True)
 parser.add_argument('--noise_perturbation', type=float, help='The std of the added noise', required=False, default=0.0)
@@ -159,6 +160,8 @@ parser.add_argument(
 
 args = parser.parse_args()
 
+if args.seed is None:
+    args.seed = random.randint(0, 10000)
 
 def parse_config():
     args.log_path = os.path.join(args.exp, "logs", args.doc)

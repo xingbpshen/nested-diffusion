@@ -5,8 +5,8 @@ import sys
 import random
 import numpy as np
 import argparse
-from MedViT import MedViT_base
 import os
+import timm
 
 sys.path.append("./models/")
 
@@ -22,24 +22,24 @@ def set_seed(seed):
 
 
 parser = argparse.ArgumentParser(description='Train Transformer')
-parser.add_argument('--seed', type=int, help='Seed value, 0, 1000, 4000', required=True)
+parser.add_argument('--seed', type=int, help='Seed value', required=False)
 parser.add_argument('--dataset', type=str, help='The dataset name', choices=['ChestXRay', 'ISICSkinCancer', 'PathMNIST',
                                                                              'RotatedMNIST'],
                     required=True)
 parser.add_argument('--root_dir', type=str, help='The directory to the data images', required=True)
 parser.add_argument('--preprocess', type=str, help='The preprocess method', choices=['grayscaled', 'standardized'],
-                    required=True)
+                    required=False, default='grayscaled')
 parser.add_argument('--model_type', type=str, help='The model type', choices=['resnet18',
                                                                               'resnet50',
                                                                               'efficientnetv2',
                                                                               'deit',
                                                                               'vit',
-                                                                              'convit',
-                                                                              'swin',
-                                                                              'medvit'], required=True)
+                                                                              'convit'], required=False, default='vit')
 args = parser.parse_args()
-
-seed = args.seed
+if args.seed is None:
+    seed = random.randint(0, 10000)
+else:
+    seed = args.seed
 dataset_name = args.dataset
 root_dir = args.root_dir
 model_type = args.model_type
@@ -73,39 +73,28 @@ elif model_type == 'deit':
     model.head = torch.nn.Linear(model.head.in_features, num_classes)
     save_model_name = 'deit_base_patch16_224'
 elif model_type == 'vit':
-    model = torch.load('./models/base/vit_base_patch16_224_in21k.pth')
+    model = timm.create_model('vit_base_patch16_224', pretrained=False)
     model.head = torch.nn.Linear(model.head.in_features, num_classes)
-    save_model_name = 'vit_base_patch16_224_in21k'
+    save_model_name = 'vit_base_patch16_224'
 elif model_type == 'convit':
     model = torch.load('./models/base/convit_base.pth')
     model.head = torch.nn.Linear(model.head.in_features, num_classes)
     save_model_name = 'convit_base'
-elif model_type == 'swin':
-    model = torch.load('./models/base/swin_base_patch4_window7_224_in22k.pth')
-    model.head = torch.nn.Linear(model.head.in_features, num_classes)
-    save_model_name = 'swin_base_patch4_window7_224_in22k'
-elif model_type == 'medvit':
-    model = MedViT_base(num_classes=num_classes)
-    save_model_name = 'medvit_base'
 else:
     raise NotImplementedError
 loader_, dataset_ = data_loader(root_dir=root_dir, dataset_name=dataset_name, preprocess=preprocess,
                                 batch_size=batch_size)
 train_loader = loader_['train']
-test_loader = loader_['test']
+valid_loader = loader_['valid']
 train_dataset = dataset_['train']
-test_dataset = dataset_['test']
+valid_dataset = dataset_['valid']
 model = model.cuda()
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 criterion = nn.CrossEntropyLoss()
-if model_type in ['resnet18', 'resnet50', 'efficientnetv2', 'deit', 'vit', 'convit', 'swin']:
+if model_type in ['resnet18', 'resnet50', 'efficientnetv2', 'deit', 'vit', 'convit']:
     optimizer = optim.AdamW(model.parameters(), lr=1e-4, weight_decay=0.1)
     scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.5)
-    epochs = 20
-elif model_type == 'medvit':
-    optimizer = optim.SGD(model.parameters(), lr=0.005, momentum=0.9)
-    scheduler = None
-    epochs = 100
+    epochs = 200
 else:
     raise NotImplementedError
 
@@ -152,7 +141,7 @@ for epoch in range(epochs):
     running_loss = 0.0
     running_corrects = 0
 
-    for inputs, labels in test_loader:
+    for inputs, labels in valid_loader:
         inputs = inputs.to(device)
         labels = labels.to(device)
 
@@ -164,21 +153,20 @@ for epoch in range(epochs):
         running_loss += loss.item() * inputs.size(0)
         running_corrects += torch.sum(preds == labels.data)
 
-    epoch_loss = running_loss / len(test_dataset)
-    epoch_acc = running_corrects.double() / len(test_dataset)
+    epoch_loss = running_loss / len(valid_dataset)
+    epoch_acc = running_corrects.double() / len(valid_dataset)
 
     print(f'Epoch {epoch} Test Loss: {epoch_loss:.4f} Acc: {epoch_acc:.4f}')
 
     if epoch_acc > best_acc:
         best_acc = epoch_acc
         best_train_acc = train_acc
-        if not os.path.exists('./models/{}_{}/seed{}/'.format(dataset_name, preprocess, seed)):
-            os.makedirs('./models/{}_{}/seed{}/'.format(dataset_name, preprocess, seed))
-        torch.save(model, './models/{}_{}/seed{}/{}_{}.pth'.format(dataset_name, preprocess, seed, save_model_name,
-                                                                   dataset_name))
+        if not os.path.exists('./models/{}/'.format(dataset_name)):
+            os.makedirs('./models/{}/'.format(dataset_name))
+        torch.save(model, './models/{}/{}_{}.pth'.format(dataset_name, save_model_name,
+                                                            dataset_name))
 
     if scheduler is not None:
         scheduler.step()
 
-print('Model {} seed {} on {} {} best train Acc: {:.4f} val Acc: {:.4f}'.format(model_type, seed, preprocess,
-                                                                                dataset_name, best_train_acc, best_acc))
+print('Model {} on {} best train Acc: {:.4f} val Acc: {:.4f}'.format(model_type, dataset_name, best_train_acc, best_acc))
