@@ -94,7 +94,7 @@ diffusion:
 ```
 
 ## Evaluation
-Once you follow all the steps in the training section, you can evaluate the trained models. We are now in the root directory `nested-diffusion`.
+Once we follow all the steps in the training section, we can evaluate the trained models. We are now in the root directory `nested-diffusion`.
 1. Please go to the `nested-diffusion/diffusion` directory:
 ```bash
 cd diffusion
@@ -103,11 +103,11 @@ cd diffusion
 ```bash
 bash testing_scripts/test.sh
 ```
-3. The above testing script has some customizable parameters, you can modify them in the script before running it. Here is an example:
+3. The above testing script has some customizable parameters, we can modify them in the script before running it. Here is an example:
 ```
 export NOISE_PERTURBATION=0.5
 ```
-then you can test it with the noise perturbation level of 0.5.
+then we can test it with the noise perturbation level of 0.5.
 
 ## Acknowledgement
 This work is founded by the Natural Sciences and Engineering Research Council (NSERC) of Canada, the Canadian Institute for Advanced Research (CIFAR) Artificial Intelligence Chairs program, the Mila - Quebec AI Institute technology transfer program, Calcul Quebec, and the Digital Research Alliance of Canada. This repository contains code adapted from repositories [CARD](https://github.com/XzwHan/CARD) and [SEViT](https://github.com/faresmalik/SEViT). We thank to the above repositories' authors for their great work.
