@@ -64,6 +64,7 @@ cd mapping
 python train_transformer.py --dataset ${DATASET} --root_dir ${DATA_DIR}
 ```
 Here, `${DATASET}` is the dataset name (e.g., `ChestXRay` or `ISICSkinCancer`). As mentioned previously, you need to provide the path to the data directory `${DATA_DIR}`.
+
 2. Train the mapping networks:
 ```bash
 python train_mapping.py --dataset ${DATASET} --root_dir ${DATA_DIR} --mn_idx {MN_IDX}
@@ -82,6 +83,7 @@ cd diffusion
 bash training_scripts/train.sh
 ```
 After the whole training process is finished, you can find the trained models in the `nested-diffusion/diffusion/results` directory.
+
 3. Please look at the configuration files in the `nested-diffusion/diffusion/configs`, you can see that the field `diffusion.trained_diffusion_ckpt_path` is set to the path of the trained diffusion models. You need to modify this field to the path of the trained diffusion models. Here is an example:
 ```
 diffusion:
