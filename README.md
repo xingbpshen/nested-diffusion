@@ -6,7 +6,7 @@ Improving Robustness and Reliability in Medical Image Classification with Latent
   <a href="https://arxiv.org/abs/2310.15952">
     <img src="https://img.shields.io/badge/arXiv-2310.15952-b31b1b.svg" alt="arXiv">
   </a>
-  <a href="https://scholar.googleusercontent.com/scholar.bib?q=info:8EHZDokzghEJ:scholar.google.com/&output=citation&scisdr=ClH2O-RNEO7Ohs15-Jw:AFWwaeYAAAAAZ2B_4Jy-b_c6Cd04v5ELUUrLUSo&scisig=AFWwaeYAAAAAZ2B_4It2kE2X8oFSph-xM3O-CAg&scisf=4&ct=citation&cd=-1&hl=en">
+  <a href="https://scholar.googleusercontent.com/scholar.bib?q=info:KtIDlbaY1BMJ:scholar.google.com/&output=citation&scisdr=CgIDp71NEMj15LFUgCg:AAZF9b8AAAAAaHJSmCjihipaY1dJ-q3GXcHN6gk&scisig=AAZF9b8AAAAAaHJSmFKt7ttohGUvYUO6_fjKjb4&scisf=4&ct=citation&cd=-1&hl=en">
     <img src="https://img.shields.io/badge/Cite-BibTeX-green.svg" alt="BibTeX">
   </a>
   <a href="https://www.python.org/">
@@ -20,10 +20,10 @@ Improving Robustness and Reliability in Medical Image Classification with Latent
 This repository contains the official implementation of the paper:
 > __Improving Robustness and Reliability in Medical Image Classification with Latent-Guided Diffusion and Nested-Ensembles__  
 > [Xing Shen](https://scholar.google.com/citations?hl=en&user=U69NqfQAAAAJ), [Hengguan Huang](https://scholar.google.com/citations?hl=en&user=GQm1eZEAAAAJ), [Brennan Nichyporuk](https://scholar.google.com/citations?user=GYKrS-EAAAAJ&hl=en), [Tal Arbel](https://www.cim.mcgill.ca/~arbel/)  
-> _arXiv Preprint, Oct 2023_  
-> __[Paper](https://arxiv.org/abs/2310.15952)&nbsp;/ [BibTeX](https://scholar.googleusercontent.com/scholar.bib?q=info:8EHZDokzghEJ:scholar.google.com/&output=citation&scisdr=ClH2O-RNEO7Ohs15-Jw:AFWwaeYAAAAAZ2B_4Jy-b_c6Cd04v5ELUUrLUSo&scisig=AFWwaeYAAAAAZ2B_4It2kE2X8oFSph-xM3O-CAg&scisf=4&ct=citation&cd=-1&hl=en)__
+> _IEEE Transactions on Medical Imaging, 2025_  
+> __Paper ([arXiv preprint](https://arxiv.org/abs/2310.15952) / [IEEE Xplore Early Access](https://ieeexplore.ieee.org/document/11059995))&nbsp;, [BibTeX](https://scholar.googleusercontent.com/scholar.bib?q=info:KtIDlbaY1BMJ:scholar.google.com/&output=citation&scisdr=CgIDp71NEMj15LFUgCg:AAZF9b8AAAAAaHJSmCjihipaY1dJ-q3GXcHN6gk&scisig=AAZF9b8AAAAAaHJSmFKt7ttohGUvYUO6_fjKjb4&scisf=4&ct=citation&cd=-1&hl=en)__
 
-Ensemble deep learning has been shown to achieve high predictive accuracy and uncertainty estimation in a wide variety of medical imaging contexts. However, perturbations in the input images at test time (e.g., noise, distribution shifts) can still lead to significant performance degradation, posing challenges for trustworthy clinical deployment. To address this challenge, we propose LaDiNE, a novel probabilistic ensemble framework that integrates invariant feature extraction with diffusion models to improve robustness and uncertainty estimation.
+Once deployed, medical image analysis methods are often faced with unexpected image corruptions and noise perturbations. These unknown covariate shifts present significant challenges to deep learning based methods trained on “clean” images. This often results in unreliable predictions and poorly calibrated confidence, hence hindering clinical applicability. To address this challenge, we propose LaDiNE, a novel probabilistic ensemble framework that integrates invariant feature extraction with diffusion models to improve robustness and uncertainty estimation.
 ![model](./assets/model.png)
 
 ## Requirements
