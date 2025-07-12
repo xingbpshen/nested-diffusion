@@ -110,7 +110,7 @@ export NOISE_PERTURBATION=0.5
 then we can test it with the noise perturbation level of 0.5.
 
 ## Acknowledgement
-This work is founded by the Natural Sciences and Engineering Research Council (NSERC) of Canada, the Canadian Institute for Advanced Research (CIFAR) Artificial Intelligence Chairs program, the Mila - Quebec AI Institute technology transfer program, Calcul Quebec, and the Digital Research Alliance of Canada. This repository contains code adapted from repositories [CARD](https://github.com/XzwHan/CARD) and [SEViT](https://github.com/faresmalik/SEViT). We thank to the above repositories' authors for their great work.
+This work was supported in part by the Natural Sciences and Engineering Research Council of Canada, in part by the Canadian Institute for Advanced Research (CIFAR) Artificial Intelligence Chairs Program, in part by the Mila—Quebec Artificial Intelligence Institute Technology Transfer Program, in part by the Mila—Google Research Grant, in part by Calcul Quebec, in part by the Digital Research Alliance of Canada, and in part by the Canada First Research Excellence Fund, awarded to the Healthy Brains, Healthy Lives initiative at McGill University. This repository contains code adapted from repositories [CARD](https://github.com/XzwHan/CARD) and [SEViT](https://github.com/faresmalik/SEViT). We thank to the above repositories' authors for their great work.
 
 ## Citation
 If you find this repository useful in your research, please cite our paper:
