@@ -21,7 +21,7 @@ This repository contains the official implementation of the paper:
 > __Improving Robustness and Reliability in Medical Image Classification with Latent-Guided Diffusion and Nested-Ensembles__  
 > [Xing Shen](https://scholar.google.com/citations?hl=en&user=U69NqfQAAAAJ), [Hengguan Huang](https://scholar.google.com/citations?hl=en&user=GQm1eZEAAAAJ), [Brennan Nichyporuk](https://scholar.google.com/citations?user=GYKrS-EAAAAJ&hl=en), [Tal Arbel](https://www.cim.mcgill.ca/~arbel/)  
 > _IEEE Transactions on Medical Imaging, 2025_  
-> __Paper ([arXiv preprint](https://arxiv.org/abs/2310.15952) / [IEEE Xplore Early Access](https://ieeexplore.ieee.org/document/11059995))&nbsp;, [BibTeX](https://scholar.googleusercontent.com/scholar.bib?q=info:KtIDlbaY1BMJ:scholar.google.com/&output=citation&scisdr=CgIDp71NEMj15LFUgCg:AAZF9b8AAAAAaHJSmCjihipaY1dJ-q3GXcHN6gk&scisig=AAZF9b8AAAAAaHJSmFKt7ttohGUvYUO6_fjKjb4&scisf=4&ct=citation&cd=-1&hl=en)__
+> __Paper ([arXiv preprint](https://arxiv.org/abs/2310.15952) / [IEEE Xplore Early Access](https://ieeexplore.ieee.org/document/11059995))&nbsp;, [BibTeX](https://scholar.googleusercontent.com/scholar.bib?q=info:KtIDlbaY1BMJ:scholar.google.com/&output=citation&scisdr=CgIDp71NEL3ugLEz7tI:AAZF9b8AAAAAaHM19tLpc6YZrtAk2Osl2LI7ohM&scisig=AAZF9b8AAAAAaHM19j3EU2V5XWkxytRfGrApf4Q&scisf=4&ct=citation&cd=-1&hl=en)__
 
 Once deployed, medical image analysis methods are often faced with unexpected image corruptions and noise perturbations. These unknown covariate shifts present significant challenges to deep learning based methods trained on “clean” images. This often results in unreliable predictions and poorly calibrated confidence, hence hindering clinical applicability. To address this challenge, we propose LaDiNE, a novel probabilistic ensemble framework that integrates invariant feature extraction with diffusion models to improve robustness and uncertainty estimation.
 ![model](./assets/model.png)
@@ -115,11 +115,12 @@ This work was supported in part by the Natural Sciences and Engineering Research
 ## Citation
 If you find this repository useful in your research, please cite our paper:
 ```
-@article{shen2023improving,
-  title={Improving Robustness and Reliability in Medical Image Classification with Latent-Guided Diffusion and Nested-Ensembles},
+@article{shen2025improving,
+  title={Improving robustness and reliability in medical image classification with latent-guided diffusion and nested-ensembles},
   author={Shen, Xing and Huang, Hengguan and Nichyporuk, Brennan and Arbel, Tal},
-  journal={arXiv preprint arXiv:2310.15952},
-  year={2023}
+  journal={IEEE Transactions on Medical Imaging},
+  year={2025},
+  publisher={IEEE}
 }
 ```
 
