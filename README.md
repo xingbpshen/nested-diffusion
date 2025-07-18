@@ -13,7 +13,7 @@ This repository contains the official implementation of the paper:
 > __Improving Robustness and Reliability in Medical Image Classification with Latent-Guided Diffusion and Nested-Ensembles__  
 > [Xing Shen](https://scholar.google.com/citations?hl=en&user=U69NqfQAAAAJ), [Hengguan Huang](https://scholar.google.com/citations?hl=en&user=GQm1eZEAAAAJ), [Brennan Nichyporuk](https://scholar.google.com/citations?user=GYKrS-EAAAAJ&hl=en), [Tal Arbel](https://www.cim.mcgill.ca/~arbel/)  
 > _IEEE Transactions on Medical Imaging, 2025_  
-> __Paper ([arXiv preprint](https://arxiv.org/abs/2310.15952) / [IEEE Xplore Early Access](https://ieeexplore.ieee.org/document/11059995))&nbsp;, [BibTeX](./assets/citation.bib)__
+> __Paper ([arXiv preprint](https://arxiv.org/abs/2310.15952) / [IEEE Xplore Early Access](https://ieeexplore.ieee.org/document/11059995)), [BibTeX](./assets/citation.bib)__
 
 ## Overview
 Once deployed, medical image analysis methods are often faced with unexpected image corruptions and noise perturbations. These unknown covariate shifts present significant challenges to deep learning based methods trained on “clean” images. This often results in unreliable predictions and poorly calibrated confidence, hence hindering clinical applicability. To address this challenge, we propose LaDiNE, a novel probabilistic ensemble framework that integrates invariant feature extraction with diffusion models to improve robustness and uncertainty estimation.
