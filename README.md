@@ -16,7 +16,7 @@ This repository contains the official implementation of the paper:
 > __Paper ([arXiv preprint](https://arxiv.org/abs/2310.15952) / [IEEE Xplore Early Access](https://ieeexplore.ieee.org/document/11059995)), [BibTeX](./assets/citation.bib)__
 
 ## Overview
-Once deployed, medical image analysis methods are often faced with unexpected image corruptions and noise perturbations. These unknown covariate shifts present significant challenges to deep learning based methods trained on “clean” images. This often results in unreliable predictions and poorly calibrated confidence, hence hindering clinical applicability. To address this challenge, we propose LaDiNE, a novel probabilistic ensemble framework that integrates invariant feature extraction with diffusion models to improve robustness and uncertainty estimation.
+Once deployed, medical image analysis methods are often faced with unexpected image corruptions and noise perturbations. These unknown covariate shifts present significant challenges to deep learning based methods trained on “clean” images. This often results in unreliable predictions and poorly calibrated confidence, hence hindering clinical applicability. To address this challenge, we propose **LaDiNE**, a novel probabilistic ensemble framework that integrates invariant feature extraction with diffusion models to improve robustness and uncertainty estimation.
 ![fig](./assets/fig.png)
 
 ## 1. Preparation
