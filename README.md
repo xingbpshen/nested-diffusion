@@ -6,7 +6,7 @@ Improving Robustness and Reliability in Medical Image Classification with Latent
   <a href="https://arxiv.org/abs/2310.15952"><img src="https://img.shields.io/badge/arXiv-2310.15952-b31b1b.svg" alt="arXiv"></a>
   <a href="./assets/citation.bib"><img src="https://img.shields.io/badge/Cite-BibTeX-green.svg" alt="BibTeX"></a>
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.8-blue.svg" alt="Python Version"></a>
-  <a href="https://pytorch.org/"><img src="https://img.shields.io/badge/PyTorch-1.10-red.svg" alt="PyTorch Version"></a>
+  <a href="https://pytorch.org/"><img src="https://img.shields.io/badge/PyTorch-1.10-de5737.svg" alt="PyTorch Version"></a>
 </p>
 
 This repository contains the official implementation of the paper:
