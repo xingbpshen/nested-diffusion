@@ -120,6 +120,9 @@ If you find this repository useful in your research, please cite our paper:
 }
 ```
 
+## Contact
+Please raise a GitHub issue or email us at <a href="mailto:xing.shen@mail.mcgill.com">xing.shen@mail.mcgill.com</a> (with the email subject starting with "[LaDiNE]") if you have any question or encounter any issue.
+
 ## References
 - Han, X., Zheng, H., & Zhou, M. (2022). Card: Classification and regression diffusion models. Advances in Neural Information Processing Systems, 35, 18100-18115.
 - Almalik, F., Yaqub, M., & Nandakumar, K. (2022, September). Self-ensembling vision transformer (sevit) for robust medical image classification. In International Conference on Medical Image Computing and Computer-Assisted Intervention (pp. 376-386). Cham: Springer Nature Switzerland.
