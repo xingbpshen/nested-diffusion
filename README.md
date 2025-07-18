@@ -55,12 +55,12 @@ We are now in the root directory `nested-diffusion`, please go to the `nested-di
 ```bash
 cd mapping
 ```
-#### 2.1.1 Train the transformer encoder blocks
+#### 2.1.1 Training transformer encoder blocks
 ```bash
 python train_transformer.py --dataset ${DATASET} --root_dir ${DATA_DIR}
 ```
 Here, `${DATASET}` is the dataset name (e.g., `ChestXRay` or `ISICSkinCancer`). As mentioned previously, you need to provide the path to the data directory `${DATA_DIR}`.
-#### 2.1.2 Train mapping MLPs
+#### 2.1.2 Training mapping MLPs
 ```bash
 python train_mapping.py --dataset ${DATASET} --root_dir ${DATA_DIR} --mn_idx {MN_IDX}
 ```
