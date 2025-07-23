@@ -123,7 +123,7 @@ If you find this repository useful in your research, please cite our paper:
 ```
 
 ## Contact
-Please raise a GitHub issue or email us at <a href="mailto:xing.shen@mail.mcgill.com">xing.shen@mail.mcgill.com</a> (with the email subject starting with "[LaDiNE]") if you have any question or encounter any issue.
+Please raise a GitHub issue or email us at <a href="mailto:xing.shen@mail.mcgill.ca">xing.shen@mail.mcgill.ca</a> (with the email subject starting with "[LaDiNE]") if you have any question or encounter any issue.
 
 ## References
 - Han, X., Zheng, H., & Zhou, M. (2022). Card: Classification and regression diffusion models. Advances in Neural Information Processing Systems, 35, 18100-18115.
