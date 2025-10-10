@@ -112,7 +112,7 @@ This work was supported in part by the Natural Sciences and Engineering Research
 
 ## Citation
 If you find this repository useful in your research, please cite our paper:
-```
+```bibtex
 @article{shen2025improving,
   title={Improving robustness and reliability in medical image classification with latent-guided diffusion and nested-ensembles},
   author={Shen, Xing and Huang, Hengguan and Nichyporuk, Brennan and Arbel, Tal},
