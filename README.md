@@ -12,7 +12,7 @@ Improving Robustness and Reliability in Medical Image Classification with Latent
 This repository contains the official implementation of the paper:
 > __Improving Robustness and Reliability in Medical Image Classification with Latent-Guided Diffusion and Nested-Ensembles__  
 > [Xing Shen](https://scholar.google.com/citations?hl=en&user=U69NqfQAAAAJ), [Hengguan Huang](https://scholar.google.com/citations?hl=en&user=GQm1eZEAAAAJ), [Brennan Nichyporuk](https://scholar.google.com/citations?user=GYKrS-EAAAAJ&hl=en), [Tal Arbel](https://www.cim.mcgill.ca/~arbel/)  
-> _IEEE Transactions on Medical Imaging, 2025_  
+> _IEEE Transactions on Medical Imaging_, vol. 44, no. 12, pp. 4890–4902, 2025  
 > __Paper ([arXiv preprint](https://arxiv.org/abs/2310.15952) / [IEEE Xplore Early Access](https://ieeexplore.ieee.org/document/11059995)), [BibTeX](./assets/citation.bib)__
 
 ## Overview
@@ -118,6 +118,9 @@ If you find this repository useful in your research, please cite our paper:
   author={Shen, Xing and Huang, Hengguan and Nichyporuk, Brennan and Arbel, Tal},
   journal={IEEE Transactions on Medical Imaging},
   year={2025},
+  volume={44},
+  number={12},
+  pages={4890-4902},
   publisher={IEEE}
 }
 ```
